@@ -1,12 +1,12 @@
 # SC17 Tutorial In transit Demo
 These scripts run the demos.
 
-script name | purpose
----------------------
-newton_in_transit.sh | launches the simulation for all the demos. take nmumber of iterations as an argument
-catalyst_in_transit.sh | launches the end-point and configures with Catalyst
-libsim_in_transit.sh | launches the end-point and and configure with Libsim
-histogram_in_transit.sh | launches the end-point and configures with histogram
+| script name | purpose  |
+--------------|----------|
+| newton_in_transit.sh | launches the simulation for all the demos. take nmumber of iterations as an argument |
+| catalyst_in_transit.sh | launches the end-point and configures with Catalyst |
+| libsim_in_transit.sh | launches the end-point and and configure with Libsim |
+| histogram_in_transit.sh | launches the end-point and configures with histogram |
 
 # More Demos
 Newton, a simple parallel n-body gravitational simulation, is written in Python
