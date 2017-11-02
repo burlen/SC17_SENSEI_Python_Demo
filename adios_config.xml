@@ -1,0 +1,7 @@
+<sensei>
+  <!-- enable only one of these at a time. dataspaces also requires one to start
+       a dataspaces_server in the background prior to running the job -->
+  <analysis type="adios" filename="newton.bp" method="FLEXPATH" enabled="1" />
+  <analysis type="adios" filename="newton.bp" method="DATASPACES" enabled="0" />
+  <analysis type="adios" filename="newton.bp" method="MPI" enabled="0" />
+</sensei>

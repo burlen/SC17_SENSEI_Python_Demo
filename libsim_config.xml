@@ -1,0 +1,5 @@
+<sensei>
+  <analysis type="libsim" plots="Pseudocolor" plotvars="ids"
+    image-filename="image_%ts" image-width="800" image-height="800"
+    slice-project="1" image-format="png" frequency="1" enabled="1"/>
+</sensei>

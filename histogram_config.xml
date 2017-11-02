@@ -1,0 +1,4 @@
+<sensei>
+  <analysis type="histogram" array="magv" association="point" bins="20" enabled="1" />
+  <analysis type="histogram" array="magf" association="point" bins="10" enabled="0" />
+</sensei>
