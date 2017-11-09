@@ -1,67 +1,33 @@
-# SC17 Tutorial In transit Demo
-These scripts run the demos.
+# In transit demo
+In the in transit demo we run the newton.py n-body code configure SENSEI use
+ADIOS+FLEXPATH to move data across the network to a SENSEI configurable
+end-point. In the end-point we configure SENSEI to use either libsim, Catalyst,
+or a custom histogram analysis. The demo requires two MPI jobs, simulation and
+end-point.The following scripts run the jobs.
 
-| script name | purpose  |
---------------|----------|
-| newton_in_transit.sh | launches the simulation for all the demos. take nmumber of iterations as an argument |
-| catalyst_in_transit.sh | launches the end-point and configures with Catalyst |
-| libsim_in_transit.sh | launches the end-point and and configure with Libsim |
-| histogram_in_transit.sh | launches the end-point and configures with histogram |
+| script name | purpose |
+|-----------------------|
+| newton_adios_in_transit.sh | launches the simulation for the in transit demos. take nmumber of iterations as an argument. launch in terminal 1. |
+| catalyst_in_transit.sh | launches the end-point and configures with Catalyst. launch in terminal 2. |
+| libsim_in_transit.sh | launches the end-point and and configure with Libsim. launch in terminal 2. |
+| histogram_in_transit.sh | launches the end-point and configures with histogram. launch in terminal 2. |
 
-# More Demos
-Newton, a simple parallel n-body gravitational simulation, is written in Python
-and ships with SENSEI. Newton was used to test SENSEI's Python bindings and to
-illustrate how SENSEI can be used from a Python simulation.
+# In situ demo
+The in situ demo repeats the in transit demos, but in situ. In this demo the
+same XML configurations used in the in transit end-point are used as before
+except on the simulation side. The following scripts run the demos.
 
-This demo shows how SENSEI can do *in situ*, *in transit*, and I/O for *post
-hoc* processing. The demo illustrates use of Catalyst, Libsim, and ADIOS.
+script name | purpose
+---------------------
+newton_catalyst_in_situ.sh | launches the simulation for the Catalyst in transit demo. take nmumber of iterations as an argument.
+newton_libsim_in_situ.sh | launches the simulation for the libsim in transit demo. take nmumber of iterations as an argument.
+newton_histogram_in_situ.sh | launches the simulation for the Catalyst in transit demo. take nmumber of iterations as an argument.
 
-## In situ
-In the in situ demo the simulation and rendering occurs in the same process.
-### Catalyst
-```bash
-module load sensei/1.1.0-catalyst
-mpiexec -np 4 python newton.py --analysis=catalyst --analysis_opts=script=newton_catalyst.py
-```
-### Libsim
-```bash
-module load sensei/1.1.0-libsim
-mpiexec -np 4 python  newton.py --analysis=configurable --analysis_opts=config=newton_libsim.xml --n_its=5
-```
-### Post hoc I/O
+# Post hoc I/O demo
 In the post hoc demo data is written to disk in ParaView or VisIt readable
 format. Note: mode=1 for VisIt readable output and mode=0 for ParaView readable
 output.
 ```bash
 module load sensei/1.1.0-vtk
 mpiexec -np 4 python newton.py --analysis=posthoc --analysis_opts=mode=1,file=newton_out
-```
-
-## In transit
-In the in transit demo ADIOS is used to move data across the network or to
-stage simulation data to shared resource (such as a burst buffer) where a
-second job called an end-point analyzes it.
-
-### Catalyst
-##### Simulation (Job 1)
-```bash
-module load sensei/1.1.0-catalyst
-mpiexec -np 4 python newton.py --analysis=configurable --analysis_opts=config=adios_config.xml
-```
-##### Rendering (Job 2)
-```bash
-module load sensei/1.1.0-catalyst
-mpiexec -np 4 ADIOSAnalysisEndPoint -r flexpath -f catalyst_config.xml newton.bp
-```
-
-### Libsim
-##### Simulation (Job 1)
-```bash
-module load sensei/1.1.0-libsim
-mpiexec -np 4 python newton.py --analysis=configurable --analysis_opts=config=adios_config.xml
-```
-##### Rendering (Job 2)
-```bash
-module load sensei/1.1.0-libsim
-mpiexec -np 4 ADIOSAnalysisEndPoint -r flexpath -f libsim_config.xml newton.bp
 ```
